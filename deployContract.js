@@ -2,10 +2,10 @@ const Web3 = require('web3')
 const fs = require('fs')
 
 
-// Connect the web3 API to local ganache ethereum network
-const web3 = new Web3('http://localhost:8545')
+ // Connect the web3 API to local ganache ethereum network
 
-
+ const web3 = new Web3('http://localhost:8545')
+ 
 // .abi filename
 const abiFileName = "contracts_MyContract_sol_MyContract.abi"
 // .bin filename
@@ -26,36 +26,35 @@ const bytecode = fs.readFileSync(binPath).toString();
 const abi = JSON.parse(fs.readFileSync(abiPath).toString());
 
 
-// Create contract object 
-const deployedContract = new web3.eth.Contract(abi)
+
+async function  deploy(){
 
 
+    // Create contract object 
+    const deployedContract = new web3.eth.Contract(abi)
 
-let account
-function deploy(success, error){
+    console.log("Getting account for deployment...")
+    const accounts = await web3.eth.getAccounts()
 
-    // Fetch the list of accounts
-    web3.eth.getAccounts().then((accounts) => {
+    // Select the first account for deployment
+    const account = accounts[0];
+    console.log('Deployment Account :', account)
 
-        // Select the first account for deployment
-        account = accounts[0];
 
-        // deploy contract
-        deployedContract.deploy({
+    console.log('Deploying contract...')
+    // deploy contract
+    const newContractInstance = await deployedContract.deploy({
             data: bytecode,
             arguments: ["Default Name"]
         }).send({
             from:account,
             gas: 1500000,
             gasPrice: web3.utils.toWei('0.00003', 'ether')
-          }).then((newContractInstance)=> {
-
-              deployedContract.options.address = newContractInstance.options.address
-              success(deployedContract)
-          }).catch(err => {
-              error(err)
           })
-    })
+
+    console.log('Contract deployed')
+    deployedContract.options.address = newContractInstance.options.address   
+    return deployedContract
 }
 
 

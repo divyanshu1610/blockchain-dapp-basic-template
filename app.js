@@ -1,15 +1,63 @@
 const { deploy } = require('./deployContract')
 
+// address of the user
+// Can be used from ganache fake accounts
+const userAddress = "YOUR ADDRESS"
+
+async function testMyContract(){
 
 
-deploy((deployedContract)=> {
-    //console.log(deployedContract)
-    deployedContract.methods.name().call(console.log)
-    deployedContract.methods.setName('Divyanshu').send({
-        from :"0xCD22E3A8E51e13B2c95a73cD6A8AC32A19b94602"
-    }).then((f) => deployedContract.methods.name().call(console.log) )
-    
-}, console.log)
+    try{
+          //Deploy the contract
+            const deployedContract = await deploy()
+
+
+            console.log('Testing the deployed contract..')
+            console.log('Your address : ', userAddress)
+
+
+            //Write your contract test methods here
+
+            // Get the default name
+            let name = await deployedContract.methods.name().call()
+            console.log(name)
+
+            
+            const newName = "MyTestName"
+            // Set any name
+            await deployedContract.methods.setName(newName).send({
+                from: userAddress
+            })
+
+            // Fetch the name again
+            name = await deployedContract.methods.name().call()
+            console.log(name)
+
+
+
+        }catch(err){
+        console.log(err)
+    }
+   
+
+}
+
+
+// Test the deployed contract
+testMyContract()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
