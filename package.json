@@ -1,0 +1,19 @@
+{
+  "name": "starter-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_modules/.bin/solcjs --bin --abi contracts/MyContract.sol -o  \"./build/contracts/\" "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ganache-cli": "^6.7.0",
+    "web3": "^1.2.1"
+  },
+  "devDependencies": {
+    "solc": "^0.5.12"
+  }
+}
