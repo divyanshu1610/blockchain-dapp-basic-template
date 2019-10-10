@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node_modules/.bin/solcjs --bin --abi contracts/MyContract.sol -o  \"./build/contracts/\" ",
+    "ganache":"node_modules/.bin/ganache-cli",
     "app": "node app.js"
   },
   "author": "",
