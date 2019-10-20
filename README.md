@@ -3,12 +3,12 @@
 
 ## Prerequisite
 > NodeJs should be installed.
-> Check out    [ https://nodejs.org/en/ ](https://nodejs.org/en/)    for NodeJs installation.
+> Check out  [ https://nodejs.org/en/ ](https://nodejs.org/en/)  for NodeJs installation.
 
 #  Usage
 ## 1. Clone/ Download the repository to local system.
 >Use git clone https://github.com/divyanshu1610/blockchain-dapp-basic-template.git
->Or Download as zip
+>Or Download as zip.
 ## 2. Install the dependencies
 **`npm install `**
 
